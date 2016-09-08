@@ -1,35 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="br.com.oliweira.cfin.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <ListView
+            android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorAccent"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="match_parent" />
 
-    </android.support.design.widget.AppBarLayout>
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menuFab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|right"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            fab:menu_icon="@drawable/plus_48"
+            fab:menu_colorNormal="@color/colorPrimary"
+            fab:menu_colorPressed="@color/colorPrimaryDark"
+            fab:menu_labels_ellipsize="end"
+            fab:menu_labels_singleLine="true">
 
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
-        android:src="@android:drawable/ic_menu_add"
-        android:tint="@android:color/white" >
-    </com.github.clans.fab.FloatingActionMenu>
-</android.support.design.widget.CoordinatorLayout>
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/addContaFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cart_outline_24"
+                fab:fab_label="Adicionar Compra"
+                fab:fab_size="mini"
+                fab:fab_colorNormal="@color/colorPrimary"
+                fab:fab_colorPressed="@color/colorPrimaryDark" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/AddContaCartaoFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/credit_card_plus_24"
+                fab:fab_size="mini"
+                fab:fab_colorNormal="@color/colorPrimary"
+                fab:fab_colorPressed="@color/colorPrimaryDark"
+                fab:fab_label="Adicionar Compra no Cartão" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/cfinFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendar_check_24"
+                fab:fab_size="mini"
+                fab:fab_colorNormal="@color/colorPrimary"
+                fab:fab_colorPressed="@color/colorPrimaryDark"
+                fab:fab_label="Visualizar Controle Financeiro" />
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </FrameLayout>
+</RelativeLayout>

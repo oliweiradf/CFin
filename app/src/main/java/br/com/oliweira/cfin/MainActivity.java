@@ -1,48 +1,71 @@
 package br.com.oliweira.cfin;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteCursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteCursor;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private FloatingActionMenu fabMenu;
+    private FloatingActionButton addContaFab;
+    private FloatingActionButton AddContaCartaoFab;
+    private FloatingActionButton cfinFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabMenu = (FloatingActionMenu) findViewById(R.id.menuFab);
+        fabMenu.setClosedOnTouchOutside(true);
+
+        addContaFab = (FloatingActionButton) findViewById(R.id.addContaFab);
+        AddContaCartaoFab = (FloatingActionButton) findViewById(R.id.AddContaCartaoFab);
+        cfinFab = (FloatingActionButton) findViewById(R.id.cfinFab);
+
+        addContaFab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                contasPadroes();
+            }
+        });
+
+        AddContaCartaoFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        cfinFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
         //Criando instancia do banco
         SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
 
-
         //***Criação das tabelas auxiliares***
 
-        //tba_contas
+        //tba_tipoconta
         StringBuilder sqlContas = new StringBuilder();
-        sqlContas.append("CREATE TABLE IF NOT EXISTS tba_contas(");
+        sqlContas.append("CREATE TABLE IF NOT EXISTS tba_tipoconta(");
         sqlContas.append("_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
-        sqlContas.append("no_conta VARCHAR(20), ");
+        sqlContas.append("no_tipoconta VARCHAR(30), ");
         sqlContas.append("vl_bruto NUMERIC(10,2), ");
         sqlContas.append("tp_operador VARCHAR(1));");
         db.execSQL(sqlContas.toString());
@@ -99,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         sqlContasCartaoMensal.append("nu_parcela NUMERIC(2)); ");
         db.execSQL(sqlContasCartaoMensal.toString());
 
+        db.close();
     }
 
     @Override
@@ -125,26 +149,53 @@ public class MainActivity extends AppCompatActivity {
 
     public void contasPadroes(){
 
-        //Criando instancia do banco
-        SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
+        //Estacia o Banco de dados
+        final SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
 
-        //contas padrões
-        SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_contas;", null);
+        SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipoconta;", null);
+
         if (csrContas.getCount() <= 0) {
+            AlertDialog.Builder msg = new AlertDialog.Builder(MainActivity.this);
 
-            String[] no_conta = {"Celular","Empréstimo a pagar","Empréstimo a receber","Investimento","Poupanca","Plano de saúde","Prestação Carro","Salario"};
-            String[] vl_bruto = {"0,00","0,00","0,00","0,00","0,00","0,00","0,00","0,00"};
-            String[] tp_operador = {"D","D","C","C","C","D","D","C"};
+            msg.setMessage("Deseja cadastrar as contas padrões?");
+            msg.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //contas padrões
+                    String[] no_conta = {"Celular","Empréstimo a pagar","Empréstimo a receber","Investimento","Poupanca","Plano de saúde","Prestação Carro","Salário"};
+                    double[] vl_bruto = {0.00,0.00 ,0.00,0.00,0.00,0.00,0.00,0.00};
+                    String[] tp_operador = {"D","D","C","C","C","D","D","C"};
 
-            for (int i = 0; i < no_conta.length; i++) {
-                ContentValues ctvContas = new ContentValues();
-                ctvContas.put("no_contaprovisoria", no_conta[i]);
-                ctvContas.put("vl_bruto", vl_bruto[i]);
-                ctvContas.put("tp_operador", tp_operador[i]);
-                db.insert("tba_contasprovisorias", "_id", ctvContas);
-            }
+                    for (int i = 0; i < no_conta.length; i++) {
+                        ContentValues ctvContas = new ContentValues();
+                        ctvContas.put("no_tipoconta", no_conta[i]);
+                        ctvContas.put("vl_bruto", vl_bruto[i]);
+                        ctvContas.put("tp_operador", tp_operador[i]);
+                        db.insert("tba_tipoconta", "_id", ctvContas);
+                    }
+
+                    Toast.makeText(getBaseContext(), "Contas padrões salvas com sucesso!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            msg.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(MainActivity.this, "Você deve cadastrar pelo menos um tipo de conta.", Toast.LENGTH_SHORT).show();
+                    db.close();
+                    Intent intent = new Intent(getApplicationContext(),NovoTipoContaActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            msg.show();
+
+        }else{
+            db.close();
+            Intent intent = new Intent(getApplicationContext(), NovaContaActivity.class);
+            startActivity(intent);
         }
 
-        Toast.makeText(getBaseContext(), "Contas Padrões adicionadas com sucesso!", Toast.LENGTH_SHORT).show();
+
     }
 }
