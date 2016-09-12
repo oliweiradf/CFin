@@ -10,56 +10,117 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="br.com.oliweira.cfin.MainActivity">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menuFab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|right"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        fab:menu_icon="@drawable/plus_48"
+        fab:menu_colorNormal="@color/colorPrimary"
+        fab:menu_colorPressed="@color/colorPrimaryDark"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
 
-        <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/menuFab"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|right"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            fab:menu_icon="@drawable/plus_48"
-            fab:menu_colorNormal="@color/colorPrimary"
-            fab:menu_colorPressed="@color/colorPrimaryDark"
-            fab:menu_labels_ellipsize="end"
-            fab:menu_labels_singleLine="true">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/cfinFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/calendar_check_24"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Visualizar Controle Financeiro" />
 
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/addContaFab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/cart_outline_24"
-                fab:fab_label="Adicionar Compra"
-                fab:fab_size="mini"
-                fab:fab_colorNormal="@color/colorPrimary"
-                fab:fab_colorPressed="@color/colorPrimaryDark" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/AddContaCartaoFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/credit_card_plus_24"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Adicionar Compra no Cartão" />
 
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/AddContaCartaoFab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/credit_card_plus_24"
-                fab:fab_size="mini"
-                fab:fab_colorNormal="@color/colorPrimary"
-                fab:fab_colorPressed="@color/colorPrimaryDark"
-                fab:fab_label="Adicionar Compra no Cartão" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/addContaFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cart_outline_24"
+            fab:fab_label="Adicionar Compra"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark" />
 
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/cfinFab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/calendar_check_24"
-                fab:fab_size="mini"
-                fab:fab_colorNormal="@color/colorPrimary"
-                fab:fab_colorPressed="@color/colorPrimaryDark"
-                fab:fab_label="Visualizar Controle Financeiro" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/configFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dots_horizontal"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Configurações" />
 
-        </com.github.clans.fab.FloatingActionMenu>
+    </com.github.clans.fab.FloatingActionMenu>
 
-    </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Saldo Disponivel"
+        android:id="@+id/tvSaldoDisponivel"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0,00"
+        android:id="@+id/tvSaldo"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_below="@+id/tvSaldoDisponivel"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="40dp" />
+
+<!--
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibTipoConta"
+        android:src="@drawable/tipo_conta"
+        android:layout_below="@+id/tvSaldo"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="55dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibCartoes"
+        android:src="@drawable/cartoes"
+        android:layout_toRightOf="@+id/ibTipoConta"
+        android:layout_alignTop="@+id/ibTipoConta"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibPessoa"
+        android:src="@drawable/pessoa"
+        android:layout_below="@+id/ibTipoConta"
+        android:layout_alignLeft="@+id/ibTipoConta"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibSalario"
+        android:src="@drawable/salario"
+        android:layout_marginBottom="47dp"
+        android:layout_below="@+id/ibCartoes"
+        android:layout_toRightOf="@+id/ibPessoa"/>
+-->
 </RelativeLayout>

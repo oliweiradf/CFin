@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addContaFab;
     private FloatingActionButton AddContaCartaoFab;
     private FloatingActionButton cfinFab;
+    private FloatingActionButton configFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         addContaFab = (FloatingActionButton) findViewById(R.id.addContaFab);
         AddContaCartaoFab = (FloatingActionButton) findViewById(R.id.AddContaCartaoFab);
         cfinFab = (FloatingActionButton) findViewById(R.id.cfinFab);
+        configFab = (FloatingActionButton) findViewById(R.id.configFab);
 
         addContaFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 contasPadroes("NovaCompraCartao");
             }
         });
+
         cfinFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +60,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        configFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //Criando instancia do banco
         SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
 
         //***Criação das tabelas auxiliares***
+
+        //tba_config
+        StringBuilder sqlConfig = new StringBuilder();
+        sqlConfig.append("CREATE TABLE IF NOT EXISTS tba_config(");
+        sqlConfig.append("_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+        sqlConfig.append("no_config VARCHAR(30), ");
+        sqlConfig.append("tp_config VARCHAR(1));");
+        db.execSQL(sqlConfig.toString());
 
         //tba_tipoconta
         StringBuilder sqlContas = new StringBuilder();

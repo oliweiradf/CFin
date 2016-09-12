@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#293070</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorBlueLight">#267dc4</color>
+    <color name="colorBlueLight">#267dc4</color>#5959AB
+    <color name="colorBlueRich">#5959AB</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorPurple">#800080</color>
     <color name="colorMagenta">#FF00FF</color>
