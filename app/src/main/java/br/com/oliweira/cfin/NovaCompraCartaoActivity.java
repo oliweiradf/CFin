@@ -3,11 +3,11 @@ package br.com.oliweira.cfin;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class NovaContaActivity extends AppCompatActivity {
+public class NovaCompraCartaoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nova_conta);
+        setContentView(R.layout.activity_nova_compra_cartao);
     }
 }

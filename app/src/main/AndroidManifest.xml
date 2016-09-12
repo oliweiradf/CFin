@@ -18,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NovaContaActivity" />
-        <activity android:name=".NovoTipoContaActivity"></activity>
+        <activity android:name=".NovoTipoContaActivity" />
+        <activity android:name=".NovaCompraActivity" />
+        <activity android:name=".NovaCompraCartaoActivity" />
+        <activity android:name=".VisualizarCFinActivity"></activity>
     </application>
 
 </manifest>

@@ -39,20 +39,21 @@ public class MainActivity extends AppCompatActivity {
         addContaFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contasPadroes();
+                contasPadroes("NovaCompra");
             }
         });
 
         AddContaCartaoFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                contasPadroes("NovaCompraCartao");
             }
         });
         cfinFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), VisualizarCFinActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void contasPadroes(){
+    public void contasPadroes(String nomeActivity){
 
         //Estacia o Banco de dados
         final SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
@@ -192,8 +193,14 @@ public class MainActivity extends AppCompatActivity {
 
         }else{
             db.close();
-            Intent intent = new Intent(getApplicationContext(), NovaContaActivity.class);
-            startActivity(intent);
+            Toast.makeText(MainActivity.this, nomeActivity, Toast.LENGTH_SHORT).show();
+            if(nomeActivity.equals("NovaCompra")){
+                Intent intent = new Intent(getApplicationContext(), NovaCompraActivity.class);
+                startActivity(intent);
+            }else if(nomeActivity.equals("NovaCompraCartao")){
+                Intent intent = new Intent(getApplicationContext(), NovaCompraCartaoActivity.class);
+                startActivity(intent);
+            }
         }
 
 
