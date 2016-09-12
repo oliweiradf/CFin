@@ -28,11 +28,21 @@
             android:id="@+id/cfinFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/calendar_check_24"
+            android:src="@drawable/google_controller"
             fab:fab_size="mini"
             fab:fab_colorNormal="@color/colorPrimary"
             fab:fab_colorPressed="@color/colorPrimaryDark"
             fab:fab_label="Visualizar Controle Financeiro" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/AddPessoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/account_plus"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Adicionar Pessoa" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/AddContaCartaoFab"
