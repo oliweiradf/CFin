@@ -10,72 +10,6 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="br.com.oliweira.cfin.MainActivity">
 
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menuFab"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom|right"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        fab:menu_icon="@drawable/plus_48"
-        fab:menu_colorNormal="@color/colorPrimary"
-        fab:menu_colorPressed="@color/colorPrimaryDark"
-        fab:menu_labels_ellipsize="end"
-        fab:menu_labels_singleLine="true">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/cfinFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/google_controller"
-            fab:fab_size="mini"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/colorPrimaryDark"
-            fab:fab_label="Visualizar Controle Financeiro" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/AddContaCartaoFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/credit_card_plus_24"
-            fab:fab_size="mini"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/colorPrimaryDark"
-            fab:fab_label="Adicionar Compra no Cartão" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/addContaFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/cart_outline_24"
-            fab:fab_label="Adicionar Compra"
-            fab:fab_size="mini"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/colorPrimaryDark" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/AddPessoa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/account_plus"
-            fab:fab_size="mini"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/colorPrimaryDark"
-            fab:fab_label="Adicionar Pessoa" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/configFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/dots_horizontal"
-            fab:fab_size="mini"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/colorPrimaryDark"
-            fab:fab_label="Configurações" />
-
-    </com.github.clans.fab.FloatingActionMenu>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -131,11 +65,76 @@
             android:layout_height="352dp"
             android:id="@+id/listView"
             android:layout_gravity="left|top"
-            android:background="@color/colorBlueLight"
+            android:background="@color/colorSilver"
             android:visibility="visible"
             android:transitionGroup="false"
             android:smoothScrollbar="false" />
     </FrameLayout>
 
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menuFab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|right"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        fab:menu_icon="@drawable/plus_48"
+        fab:menu_colorNormal="@color/colorPrimary"
+        fab:menu_colorPressed="@color/colorPrimaryDark"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/cfinFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/google_controller"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Visualizar Controle Financeiro" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/addContaCartaoFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/credit_card_plus_24"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Adicionar Compra no Cartão" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/addContaFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cart_outline_24"
+            fab:fab_label="Adicionar Compra"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/addPessoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/account_plus"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Adicionar Pessoa" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/configFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dots_horizontal"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_label="Configurações" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>

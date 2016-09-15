@@ -22,7 +22,10 @@
         <activity android:name=".NovaCompraActivity" />
         <activity android:name=".NovaCompraCartaoActivity" />
         <activity android:name=".VisualizarCFinActivity" />
-        <activity android:name=".ConfiguracoesActivity" android:label="Configurações"/>
+        <activity
+            android:name=".ConfiguracoesActivity"
+            android:label="Configurações" />
+        <activity android:name=".PessoaActivity"></activity>
     </application>
 
 </manifest>

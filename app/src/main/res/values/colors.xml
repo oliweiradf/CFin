@@ -8,5 +8,7 @@
     <color name="colorPurple">#800080</color>
     <color name="colorMagenta">#FF00FF</color>
     <color name="colorAqua">#00FFFF</color>
+    <color name="colorSilver">#E6E8FA</color>
+    <color name="colorYellow">#FFFF00</color>
 
 </resources>

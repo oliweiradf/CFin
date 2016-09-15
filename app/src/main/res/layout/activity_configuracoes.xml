@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,7 +13,7 @@
 
     <!-- Campos tipos contas fixas-->
     <TextView
-        android:id="@+id/tvTipoContaFixo"
+        android:id="@+id/tvTipoContaFixa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -22,21 +23,22 @@
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 
-    <ToggleButton
-        android:id="@+id/tbtnTipoContaFixo"
+    <Switch
+        android:id="@+id/swtTipoContaFixa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvTipoContaFixo"
+        android:layout_alignBottom="@+id/tvTipoContaFixa"
         android:layout_alignParentEnd="true"
-        android:text="" />
+        android:text="Off/On"
+        android:textColor="@color/colorWhite" />
 
     <TextView
-        android:id="@+id/tvComentTipoContaFixo"
+        android:id="@+id/tvComentTipoContaFixa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTipoContaFixo"
+        android:layout_below="@+id/tvTipoContaFixa"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/tbtnTipoContaFixo"
+        android:layout_alignBottom="@+id/swtTipoContaFixa"
         android:text="Usa o tipo de contas padrões do sistema."
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite"/>
@@ -46,7 +48,7 @@
         android:id="@+id/tvSalarioFixo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvComentTipoContaFixo"
+        android:layout_below="@+id/tvComentTipoContaFixa"
         android:layout_alignParentStart="true"
         android:text="Salário Fixo"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -54,13 +56,14 @@
         android:textStyle="bold"
         android:layout_marginTop="40dp" />
 
-    <ToggleButton
-        android:id="@+id/tbtnConfigSalario"
+    <Switch
+        android:id="@+id/swtSalarioFixo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvSalarioFixo"
+        android:layout_alignBottom="@+id/tvSalarioFixo"
         android:layout_alignParentEnd="true"
-        android:text="" />
+        android:text="Off/On"
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:id="@+id/tvComentSalarioFixo"
@@ -68,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSalarioFixo"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/tbtnConfigSalario"
+        android:layout_alignBottom="@+id/swtSalarioFixo"
         android:text="Usa o salário fixo para todo sistema."
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite" />
@@ -81,7 +84,7 @@
         android:layout_alignParentStart="true"
         android:text="Cadastrar Salário Fixo"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/colorAqua"
+        android:textColor="@color/colorYellow"
         android:textStyle="bold" />
 
     <!-- Campos backup automatico -->
@@ -97,13 +100,14 @@
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 
-    <ToggleButton
-        android:id="@+id/tbtnBackupAutomatico"
+    <Switch
+        android:id="@+id/swtBackupAutomatico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvBackupAutomatico"
+        android:layout_alignBottom="@+id/tvBackupAutomatico"
         android:layout_alignParentEnd="true"
-        android:text="" />
+        android:text="Off/On"
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:id="@+id/tvComentBackupAutomatico"
@@ -111,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvBackupAutomatico"
-        android:layout_alignBottom="@+id/tbtnBackupAutomatico"
+        android:layout_alignBottom="@+id/swtBackupAutomatico"
         android:text="Faz backup automático mensalmente."
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite"/>
@@ -129,13 +133,14 @@
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 
-    <ToggleButton
-        android:id="@+id/tbtnCartao"
+    <Switch
+        android:id="@+id/swtCartao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvCartao"
+        android:layout_alignBottom="@+id/tvCartao"
         android:layout_alignParentEnd="true"
-        android:text="" />
+        android:text="Off/On"
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:id="@+id/tvComentCartao"
@@ -143,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvCartao"
-        android:layout_alignBottom="@+id/tbtnCartao"
+        android:layout_alignBottom="@+id/swtCartao"
         android:text="Usar cartão nas compras."
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite"/>
@@ -156,7 +161,7 @@
         android:layout_alignParentStart="true"
         android:text="Cadastrar Cartão"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/colorAqua"
+        android:textColor="@color/colorYellow"
         android:textStyle="bold" />
 
     <Button

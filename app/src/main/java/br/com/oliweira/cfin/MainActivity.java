@@ -20,9 +20,10 @@ import com.github.clans.fab.FloatingActionMenu;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionMenu fabMenu;
-    private FloatingActionButton addContaFab;
-    private FloatingActionButton AddContaCartaoFab;
     private FloatingActionButton cfinFab;
+    private FloatingActionButton addContaCartaoFab;
+    private FloatingActionButton addContaFab;
+    private FloatingActionButton addPessoaFab;
     private FloatingActionButton configFab;
 
     @Override
@@ -33,10 +34,26 @@ public class MainActivity extends AppCompatActivity {
         fabMenu = (FloatingActionMenu) findViewById(R.id.menuFab);
         fabMenu.setClosedOnTouchOutside(true);
 
-        addContaFab = (FloatingActionButton) findViewById(R.id.addContaFab);
-        AddContaCartaoFab = (FloatingActionButton) findViewById(R.id.AddContaCartaoFab);
         cfinFab = (FloatingActionButton) findViewById(R.id.cfinFab);
+        addContaCartaoFab = (FloatingActionButton) findViewById(R.id.addContaCartaoFab);
+        addContaFab = (FloatingActionButton) findViewById(R.id.addContaFab);
+        addPessoaFab = (FloatingActionButton) findViewById(R.id.addPessoa);
         configFab = (FloatingActionButton) findViewById(R.id.configFab);
+
+        cfinFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), VisualizarCFinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        addContaCartaoFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contasPadroes("NovaCompraCartao");
+            }
+        });
 
         addContaFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,17 +62,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        AddContaCartaoFab.setOnClickListener(new View.OnClickListener() {
+        addPessoaFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contasPadroes("NovaCompraCartao");
-            }
-        });
-
-        cfinFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), VisualizarCFinActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PessoaActivity.class);
                 startActivity(intent);
             }
         });
@@ -77,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder sqlConfig = new StringBuilder();
         sqlConfig.append("CREATE TABLE IF NOT EXISTS tba_config(");
         sqlConfig.append("_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
-        sqlConfig.append("no_config VARCHAR(30), ");
-        sqlConfig.append("tp_config VARCHAR(1));");
+        sqlConfig.append("tp_contafixa INTEGER(1), ");
+        sqlConfig.append("tp_salariofixo INTEGER(1), ");
+        sqlConfig.append("tp_backupauto INTEGER(1), ");
+        sqlConfig.append("tp_cartao INTEGER(1))");
         db.execSQL(sqlConfig.toString());
 
         //tba_tipoconta
