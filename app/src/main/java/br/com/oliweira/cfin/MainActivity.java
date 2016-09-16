@@ -19,6 +19,7 @@ import com.github.clans.fab.FloatingActionMenu;
 
 public class MainActivity extends AppCompatActivity {
 
+    private SQLiteDatabase db;
     private FloatingActionMenu fabMenu;
     private FloatingActionButton cfinFab;
     private FloatingActionButton addContaCartaoFab;
@@ -31,55 +32,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fabMenu = (FloatingActionMenu) findViewById(R.id.menuFab);
-        fabMenu.setClosedOnTouchOutside(true);
-
-        cfinFab = (FloatingActionButton) findViewById(R.id.cfinFab);
-        addContaCartaoFab = (FloatingActionButton) findViewById(R.id.addContaCartaoFab);
-        addContaFab = (FloatingActionButton) findViewById(R.id.addContaFab);
-        addPessoaFab = (FloatingActionButton) findViewById(R.id.addPessoa);
-        configFab = (FloatingActionButton) findViewById(R.id.configFab);
-
-        cfinFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), VisualizarCFinActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        addContaCartaoFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                contasPadroes("NovaCompraCartao");
-            }
-        });
-
-        addContaFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                contasPadroes("NovaCompra");
-            }
-        });
-
-        addPessoaFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PessoaActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        configFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
-                startActivity(intent);
-            }
-        });
-
         //Criando instancia do banco
-        SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
+        db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
 
         //***Criação das tabelas auxiliares***
 
@@ -90,8 +44,24 @@ public class MainActivity extends AppCompatActivity {
         sqlConfig.append("tp_contafixa INTEGER(1), ");
         sqlConfig.append("tp_salariofixo INTEGER(1), ");
         sqlConfig.append("tp_backupauto INTEGER(1), ");
-        sqlConfig.append("tp_cartao INTEGER(1))");
+        sqlConfig.append("dt_backup VARCHAR(10), ");
+        sqlConfig.append("tp_cartao INTEGER(1));");
         db.execSQL(sqlConfig.toString());
+/*
+        StringBuilder sqlAlterConfig = new StringBuilder();
+        sqlAlterConfig.append("ALTER TABLE tba_config ADD COLUMN dt_backup DATE;");
+        db.execSQL(sqlAlterConfig.toString());
+*/
+        SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+        if (csrConfig.getCount() <= 0) {
+            //coloca os valores num container
+            ContentValues ctvSalvaConfig = new ContentValues();
+            ctvSalvaConfig.put("tp_contafixa", 0);
+            ctvSalvaConfig.put("tp_salariofixo", 0);
+            ctvSalvaConfig.put("tp_backupauto", 0);
+            ctvSalvaConfig.put("tp_cartao", 0);
+            db.insert("tba_config", "_id", ctvSalvaConfig);
+        }
 
         //tba_tipoconta
         StringBuilder sqlContas = new StringBuilder();
@@ -158,6 +128,79 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //Criando instancia do banco
+        db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
+
+        fabMenu = (FloatingActionMenu) findViewById(R.id.menuFab);
+        fabMenu.setClosedOnTouchOutside(true);
+
+
+        cfinFab = (FloatingActionButton) findViewById(R.id.cfinFab);
+        addContaCartaoFab = (FloatingActionButton) findViewById(R.id.addContaCartaoFab);
+        addContaFab = (FloatingActionButton) findViewById(R.id.addContaFab);
+        addPessoaFab = (FloatingActionButton) findViewById(R.id.addPessoa);
+        configFab = (FloatingActionButton) findViewById(R.id.configFab);
+
+        SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+        csrConfig.moveToFirst();
+
+        int valContaCartaoFab = csrConfig.getInt(4);
+
+        if(valContaCartaoFab == 0){
+            addContaCartaoFab.setEnabled(false);
+        }else{
+            addContaCartaoFab.setEnabled(true);
+        }
+
+        cfinFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenu.close(true);
+                Intent intent = new Intent(getApplicationContext(), VisualizarCFinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        addContaCartaoFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenu.close(true);
+                contasPadroes("NovaCompraCartao");
+            }
+        });
+
+        addContaFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenu.close(true);
+                contasPadroes("NovaCompra");
+            }
+        });
+
+        addPessoaFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenu.close(true);
+                Intent intent = new Intent(getApplicationContext(), PessoaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        configFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenu.close(true);
+                Intent intent = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        db.close();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -205,6 +248,17 @@ public class MainActivity extends AppCompatActivity {
                         ctvContas.put("tp_operador", tp_operador[i]);
                         db.insert("tba_tipoconta", "_id", ctvContas);
                     }
+
+                    //insere 1 na coluna "tp_contafixa"da tabela "tba_config" para falar que o app usa um conta fixa
+                    SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+
+                    csrConfig.moveToFirst();
+
+                    ContentValues ctvSalvaConfigContaFixa = new ContentValues();
+                    ctvSalvaConfigContaFixa.put("tp_contafixa", 1);
+                    db.update("tba_config", ctvSalvaConfigContaFixa, "_id = ?",  new String[]{String.valueOf(csrConfig.getInt(0))});
+
+                    db.close();
 
                     Toast.makeText(getBaseContext(), "Contas padrões salvas com sucesso!", Toast.LENGTH_SHORT).show();
 

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -18,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginTop="30dp"
-        android:text="Tipo Contas Fixas"
+        android:text="@string/tipo_contas_fixas"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
@@ -29,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvTipoContaFixa"
         android:layout_alignParentEnd="true"
-        android:text="Off/On"
+        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -38,23 +37,33 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTipoContaFixa"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/swtTipoContaFixa"
-        android:text="Usa o tipo de contas padrões do sistema."
+        android:text="@string/usa_o_tipo_de_contas_padroes_do_sistema"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/tvCadastrarContasFixas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentTipoContaFixa"
+        android:layout_alignParentStart="true"
+        android:text="@string/cadastrar_contas_fixas"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorYellow"
+        android:textStyle="bold" />
 
     <!-- Campos salario fixo -->
     <TextView
         android:id="@+id/tvSalarioFixo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvComentTipoContaFixa"
+        android:layout_below="@+id/tvCadastrarContasFixas"
         android:layout_alignParentStart="true"
-        android:text="Salário Fixo"
+        android:layout_marginTop="20dp"
+        android:text="@string/salario_fixo"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:layout_marginTop="40dp" />
+        android:textStyle="bold" />
 
     <Switch
         android:id="@+id/swtSalarioFixo"
@@ -62,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvSalarioFixo"
         android:layout_alignParentEnd="true"
-        android:text="Off/On"
+        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -71,8 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSalarioFixo"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/swtSalarioFixo"
-        android:text="Usa o salário fixo para todo sistema."
+        android:text="@string/usa_o_salario_fixo_para_todo_sistema"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite" />
 
@@ -82,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvComentSalarioFixo"
         android:layout_alignParentStart="true"
-        android:text="Cadastrar Salário Fixo"
+        android:text="@string/cadastrar_salario_fixo"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/colorYellow"
         android:textStyle="bold" />
@@ -95,7 +103,7 @@
         android:layout_below="@+id/tvComentSalarioFixo"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
-        android:text="Backup Automático"
+        android:text="@string/backup_automatico"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
@@ -106,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvBackupAutomatico"
         android:layout_alignParentEnd="true"
-        android:text="Off/On"
+        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -115,10 +123,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvBackupAutomatico"
-        android:layout_alignBottom="@+id/swtBackupAutomatico"
-        android:text="Faz backup automático mensalmente."
+        android:text="@string/faz_backup_automatico_mensalmente"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/tvBackupManual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentBackupAutomatico"
+        android:layout_alignParentStart="true"
+        android:text="@string/fazer_backup_agora"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorYellow"
+        android:textStyle="bold" />
 
     <!-- Campos cartao -->
     <TextView
@@ -128,7 +146,7 @@
         android:layout_below="@+id/tvComentBackupAutomatico"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
-        android:text="Cartão"
+        android:text="@string/cartao"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
@@ -139,7 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvCartao"
         android:layout_alignParentEnd="true"
-        android:text="Off/On"
+        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -148,8 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvCartao"
-        android:layout_alignBottom="@+id/swtCartao"
-        android:text="Usar cartão nas compras."
+        android:text="@string/usar_cartao_nas_compras"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorWhite"/>
 
@@ -159,7 +176,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvComentCartao"
         android:layout_alignParentStart="true"
-        android:text="Cadastrar Cartão"
+        android:text="@string/cadastrar_cartao"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/colorYellow"
         android:textStyle="bold" />
@@ -168,9 +185,10 @@
         android:id="@+id/btnSalvarConfig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salvar Configurações"
-        android:layout_below="@+id/tvCadastrarCartao"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/tvCadastrarCartao"
+        android:text="@string/salvar_configuracoes"
+        android:onClick="salvarConfig" />
 
 </RelativeLayout>

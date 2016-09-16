@@ -25,7 +25,10 @@
         <activity
             android:name=".ConfiguracoesActivity"
             android:label="Configurações" />
-        <activity android:name=".PessoaActivity"></activity>
+        <activity android:name=".PessoaActivity" />
+        <activity android:name=".BackupManualActivity" />
+        <activity android:name=".TipoContaFixaActivity" />
+        <activity android:name=".CartaoActivity"></activity>
     </application>
 
 </manifest>
