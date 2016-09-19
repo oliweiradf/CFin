@@ -85,6 +85,16 @@
         android:textColor="@color/colorWhite" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/tvValorSalarioFixo"
+        android:layout_below="@+id/swtSalarioFixo"
+        android:layout_alignEnd="@+id/swtSalarioFixo"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
         android:id="@+id/tvCadastrarSalarioFixo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -125,6 +135,16 @@
         android:layout_below="@+id/tvBackupAutomatico"
         android:text="@string/faz_backup_automatico_mensalmente"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/tvDataBackupManual"
+        android:layout_below="@+id/swtBackupAutomatico"
+        android:layout_alignEnd="@+id/swtBackupAutomatico"
         android:textColor="@color/colorWhite"/>
 
     <TextView

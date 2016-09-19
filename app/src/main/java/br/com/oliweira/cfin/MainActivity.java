@@ -44,12 +44,13 @@ public class MainActivity extends AppCompatActivity {
         sqlConfig.append("tp_contafixa INTEGER(1), ");
         sqlConfig.append("tp_salariofixo INTEGER(1), ");
         sqlConfig.append("tp_backupauto INTEGER(1), ");
-        sqlConfig.append("dt_backup VARCHAR(10), ");
-        sqlConfig.append("tp_cartao INTEGER(1));");
+        sqlConfig.append("tp_cartao INTEGER(1),");
+        sqlConfig.append("vl_salariofixo NUMERIC(10,2), ");
+        sqlConfig.append("dt_backup VARCHAR(10)); ");
         db.execSQL(sqlConfig.toString());
 /*
         StringBuilder sqlAlterConfig = new StringBuilder();
-        sqlAlterConfig.append("ALTER TABLE tba_config ADD COLUMN dt_backup DATE;");
+        sqlAlterConfig.append("ALTER TABLE tba_config ADD COLUMN dt_backup VARCHAR;");
         db.execSQL(sqlAlterConfig.toString());
 */
         SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             ctvSalvaConfig.put("tp_salariofixo", 0);
             ctvSalvaConfig.put("tp_backupauto", 0);
             ctvSalvaConfig.put("tp_cartao", 0);
+            ctvSalvaConfig.put("vl_salariofixo", 0.00);
             db.insert("tba_config", "_id", ctvSalvaConfig);
         }
 
@@ -256,11 +258,14 @@ public class MainActivity extends AppCompatActivity {
 
                     ContentValues ctvSalvaConfigContaFixa = new ContentValues();
                     ctvSalvaConfigContaFixa.put("tp_contafixa", 1);
-                    db.update("tba_config", ctvSalvaConfigContaFixa, "_id = ?",  new String[]{String.valueOf(csrConfig.getInt(0))});
+
+                    if(db.update("tba_config", ctvSalvaConfigContaFixa, "_id = ?",  new String[]{String.valueOf(csrConfig.getInt(0))}) > 0){
+                        Toast.makeText(getBaseContext(), "Contas padrões salvas com sucesso!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getBaseContext(), "Não foi possivel salvas as contas padrões", Toast.LENGTH_SHORT).show();
+                    }
 
                     db.close();
-
-                    Toast.makeText(getBaseContext(), "Contas padrões salvas com sucesso!", Toast.LENGTH_SHORT).show();
 
                 }
             });

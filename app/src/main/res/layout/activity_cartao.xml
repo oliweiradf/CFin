@@ -17,4 +17,51 @@
         android:id="@+id/tvNomeCartao"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNomeCartao"
+        android:layout_below="@+id/tvNomeCartao"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tipo de Bandeira"
+        android:id="@+id/tvTipoBandeira"
+        android:layout_below="@+id/etNomeCartao"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnTipoBandeira"
+        android:layout_below="@+id/tvTipoBandeira"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tipo do Operador"
+        android:id="@+id/tvTipoOperador"
+        android:layout_below="@+id/spnTipoBandeira"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/spnTipoOperador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTipoOperador"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar Cartão"
+        android:id="@+id/btnSalvarCartao"
+        android:layout_below="@+id/spnTipoOperador"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
