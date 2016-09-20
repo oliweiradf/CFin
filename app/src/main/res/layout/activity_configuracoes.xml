@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.com.oliweira.cfin.ConfiguracoesActivity"
+    android:background="@color/colorBlueRich">
+
+    <!-- Campos tipos contas fixas-->
+    <TextView
+        android:id="@+id/tvTipoContaFixa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/tipo_contas_fixas"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/swtTipoContaFixa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvTipoContaFixa"
+        android:layout_alignParentEnd="true"
+        android:text="@string/off_on"
+        android:textColor="@color/colorWhite" />
+
+    <TextView
+        android:id="@+id/tvComentTipoContaFixa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTipoContaFixa"
+        android:layout_alignParentStart="true"
+        android:text="@string/usa_o_tipo_de_contas_padroes_do_sistema"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/tvCadastrarContasFixas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentTipoContaFixa"
+        android:layout_alignParentStart="true"
+        android:text="@string/cadastrar_contas_fixas"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorYellow"
+        android:textStyle="bold" />
+
+    <!-- Campos salario fixo -->
+    <TextView
+        android:id="@+id/tvSalarioFixo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCadastrarContasFixas"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/salario_fixo"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/swtSalarioFixo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvSalarioFixo"
+        android:layout_alignParentEnd="true"
+        android:text="@string/off_on"
+        android:textColor="@color/colorWhite" />
+
+    <TextView
+        android:id="@+id/tvComentSalarioFixo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSalarioFixo"
+        android:layout_alignParentStart="true"
+        android:text="@string/usa_o_salario_fixo_para_todo_sistema"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorWhite" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/tvValorSalarioFixo"
+        android:layout_below="@+id/swtSalarioFixo"
+        android:layout_alignEnd="@+id/swtSalarioFixo"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/tvCadastrarSalarioFixo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentSalarioFixo"
+        android:layout_alignParentStart="true"
+        android:text="@string/cadastrar_salario_fixo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorYellow"
+        android:textStyle="bold" />
+
+    <!-- Campos backup automatico -->
+    <TextView
+        android:id="@+id/tvBackupAutomatico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentSalarioFixo"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/backup_automatico"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/swtBackupAutomatico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvBackupAutomatico"
+        android:layout_alignParentEnd="true"
+        android:text="@string/off_on"
+        android:textColor="@color/colorWhite" />
+
+    <TextView
+        android:id="@+id/tvComentBackupAutomatico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvBackupAutomatico"
+        android:text="@string/faz_backup_automatico_mensalmente"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/tvDataBackupManual"
+        android:layout_below="@+id/swtBackupAutomatico"
+        android:layout_alignEnd="@+id/swtBackupAutomatico"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/tvBackupManual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentBackupAutomatico"
+        android:layout_alignParentStart="true"
+        android:text="@string/fazer_backup_agora"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorYellow"
+        android:textStyle="bold" />
+
+    <!-- Campos cartao -->
+    <TextView
+        android:id="@+id/tvCartao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentBackupAutomatico"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/cartao"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/swtCartao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvCartao"
+        android:layout_alignParentEnd="true"
+        android:text="@string/off_on"
+        android:textColor="@color/colorWhite" />
+
+    <TextView
+        android:id="@+id/tvComentCartao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvCartao"
+        android:text="@string/usar_cartao_nas_compras"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/tvCadastrarCartao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvComentCartao"
+        android:layout_alignParentStart="true"
+        android:text="@string/cadastrar_cartao"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorYellow"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnSalvarConfig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/tvCadastrarCartao"
+        android:text="@string/salvar_configuracoes"
+        android:onClick="salvarConfig" />
+
+</RelativeLayout>

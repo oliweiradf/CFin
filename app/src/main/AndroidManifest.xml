@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.oliweira.cfin">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/cfin_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".NovoTipoContaActivity" />
+        <activity android:name=".NovaCompraActivity" />
+        <activity android:name=".NovaCompraCartaoActivity" />
+        <activity android:name=".VisualizarCFinActivity" />
+        <activity
+            android:name=".ConfiguracoesActivity"
+            android:label="Configurações" />
+        <activity android:name=".PessoaActivity" />
+        <activity android:name=".BackupManualActivity" />
+        <activity android:name=".TipoContaFixaActivity" />
+        <activity android:name=".CartaoActivity"></activity>
+    </application>
+
+</manifest>

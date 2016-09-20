@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tipo_contas_fixas">Tipo Contas Fixas</string>
+    <string name="off_on">Off/On</string>
+    <string name="usa_o_tipo_de_contas_padr_es_do_sistema">Usa o tipo de contas padrões do sistema.</string>
+    <string name="sal_rio_fixo">Salário Fixo</string>
+    <string name="usa_o_sal_rio_fixo_para_todo_sistema">Usa o salário fixo para todo sistema.</string>
+    <string name="cadastrar_sal_rio_fixo">Cadastrar Salário Fixo</string>
+    <string name="backup_autom_tico">Backup Automático</string>
+    <string name="faz_backup_autom_tico_mensalmente">Faz backup automático mensalmente.</string>
+    <string name="cartao">Cartão</string>
+    <string name="usar_cart_o_nas_compras">Usar cartão nas compras.</string>
+    <string name="cadastrar_cart_o">Cadastrar Cartão</string>
+    <string name="salvar_configura_es">Salvar Configurações</string>
+    <string name="saldo_disponivel">Saldo Disponivel</string>
+    <string name="_0_00">0,00</string>
+    <string name="mural_de_avisos">Mural de Avisos</string>
+    <string name="cadastrar_contas_fixas">Cadastrar Contas Fixas</string>
+    <string name="fazer_backup_agora">Fazer Backup Agora</string>
+    <string name="salvar_salario">Salvar Salário</string>
+    <string name="selecione_tabelas_backup">Selecione as tabelas para o backup:</string>
+    <string name="nome_cartao">Nome do Cartão</string>
+</resources>
