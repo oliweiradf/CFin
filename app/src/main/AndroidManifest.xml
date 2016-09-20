@@ -15,18 +15,17 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".BackupActivity" />
+        <activity android:name=".CartaoActivity" />
         <activity android:name=".CompraActivity" />
         <activity android:name=".CompraCartaoActivity" />
-        <activity android:name=".ControleFinanceiroActivity" />
         <activity android:name=".ConfiguracoesActivity" android:label="Configurações" />
+        <activity android:name=".ControleFinanceiroActivity" />
         <activity android:name=".PessoaActivity" />
-        <activity android:name=".BackupActivity" />
         <activity android:name=".TipoContaFixaActivity" />
-        <activity android:name=".CartaoActivity" />
     </application>
 
 </manifest>
