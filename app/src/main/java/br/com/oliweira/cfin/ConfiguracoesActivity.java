@@ -42,7 +42,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-    //Criando instancia do banco
+        //Criando instancia do banco
         db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
 
         final SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
@@ -51,7 +51,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         assert swtTipoContaFixa != null;
         final Switch swtSalarioFixo = (Switch) findViewById(R.id.swtSalarioFixo);
         assert swtSalarioFixo != null;
-        Switch swtBackupAutomatico = (Switch) findViewById(R.id.swtBackupAutomatico);
+        final Switch swtBackupAutomatico = (Switch) findViewById(R.id.swtBackupAutomatico);
         assert swtBackupAutomatico != null;
         final Switch swtCartao = (Switch) findViewById(R.id.swtCartao);
         assert swtCartao != null;
@@ -272,7 +272,42 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             });
         }
 
-        TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
+        final TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
+        if(tvValorSalarioFixo.getText() != ""){
+            tvValorSalarioFixo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertExcluirSalario=  new AlertDialog.Builder(ConfiguracoesActivity.this);
+                    alertExcluirSalario.setMessage("Deseja excluir o salário fixo cadastrado?");
+                    alertExcluirSalario.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            SQLiteCursor csrConfigExcluiSalario = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+                            csrConfigExcluiSalario.moveToFirst();
+                            ContentValues ctvExcluirSalarioFixo = new ContentValues();
+                            ctvExcluirSalarioFixo.put("vl_salariofixo", 0);
+                            ctvExcluirSalarioFixo.put("tp_salariofixo", 0);
+
+                            if(db.update("tba_config", ctvExcluirSalarioFixo, "_id = ?",  new String[]{String.valueOf(csrConfigExcluiSalario.getInt(0))}) > 0){
+                                Toast.makeText(getBaseContext(), "Salário Fixo excluído com sucesso!", Toast.LENGTH_SHORT).show();
+                                swtSalarioFixo.setChecked(false);
+                                tvValorSalarioFixo.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    });
+                    alertExcluirSalario.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertExcluirSalario.show();
+                }
+            });
+        }
+
+        final TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
         if(tvDataBackupManual.getText() != ""){
             tvDataBackupManual.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -287,9 +322,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                             csrConfigExcluiData.moveToFirst();
                             ContentValues ctvExcluirDataBackup = new ContentValues();
                             ctvExcluirDataBackup.put("dt_backup", "");
+                            ctvExcluirDataBackup.put("tp_backupauto", 0);
 
                             if(db.update("tba_config", ctvExcluirDataBackup, "_id = ?",  new String[]{String.valueOf(csrConfigExcluiData.getInt(0))}) > 0){
-                                Toast.makeText(getBaseContext(), "Data do Backup excluida com sucesso!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(), "Data do Backup excluída com sucesso!", Toast.LENGTH_SHORT).show();
+                                swtBackupAutomatico.setChecked(false);
+                                tvDataBackupManual.setVisibility(View.INVISIBLE);
                             }
                         }
                     });
@@ -300,31 +338,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                         }
                     });
                     alertExcluirDataBackup.show();
-                }
-            });
-        }
-
-        TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
-        if(tvValorSalarioFixo.getText() != ""){
-            tvValorSalarioFixo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder alertExcluirSalario=  new AlertDialog.Builder(ConfiguracoesActivity.this);
-                    alertExcluirSalario.setMessage("Deseja excluir o salário fixo cadastrado?");
-                    alertExcluirSalario.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent inttBackupManual = new Intent(getApplicationContext(),BackupManualActivity.class);
-                            startActivity(inttBackupManual);
-                        }
-                    });
-                    alertExcluirSalario.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    alertExcluirSalario.show();
                 }
             });
         }
