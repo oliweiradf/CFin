@@ -57,12 +57,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         assert swtCartao != null;
 
         //Recupera os objetos dos TextView
-        final TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
-        final TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
         TextView tvCadastrarContasFixas = (TextView) findViewById(R.id.tvCadastrarContasFixas);
         TextView tvCadastrarSalarioFixo = (TextView) findViewById(R.id.tvCadastrarSalarioFixo);
         TextView tvBackupManual = (TextView) findViewById(R.id.tvBackupManual);
         TextView tvCadastrarCartao = (TextView) findViewById(R.id.tvCadastrarCartao);
+        final TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
+        final TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
 
         //Move o cursor para a primeira linha
         if(csrConfig.moveToFirst()){
@@ -106,11 +106,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 tvValorSalarioFixo.setText("");
             }
 
-            if(csrConfig.getString(csrConfig.getColumnIndex("dt_backup")) != ""){
-                tvDataBackupManual.setText("("+csrConfig.getString(csrConfig.getColumnIndex("dt_backup"))+")");
-            }else{
+                Toast.makeText(getBaseContext(), "diferente de vazio: "+csrConfig.getString(csrConfig.getColumnIndex("dt_backup")), Toast.LENGTH_SHORT).show();
+            if(csrConfig.getString(csrConfig.getColumnIndex("dt_backup")) == null){
                 tvDataBackupManual.setText("");
                 Toast.makeText(getBaseContext(), "Aplicando vazio para o campo tvDataBackupManual", Toast.LENGTH_SHORT).show();
+            }else{
+                tvDataBackupManual.setText("("+csrConfig.getString(csrConfig.getColumnIndex("dt_backup"))+")");
             }
 
         }
