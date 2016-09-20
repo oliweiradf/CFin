@@ -23,13 +23,11 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.lang.Thread.sleep;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
 
     private SQLiteDatabase db;
     final private static int DIALOG_LOGIN = 1;
-    private AlertDialog alertBackupManual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +40,13 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //Criando instancia do banco
+        //Cria instancia do banco
         db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
 
+        //Recupera os dados de Configuração
         final SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
 
+        //Recupera os objetos do Switchs e afirma que os mesmos não são nulos
         final Switch swtTipoContaFixa = (Switch) findViewById(R.id.swtTipoContaFixa);
         assert swtTipoContaFixa != null;
         final Switch swtSalarioFixo = (Switch) findViewById(R.id.swtSalarioFixo);
@@ -56,10 +56,21 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         final Switch swtCartao = (Switch) findViewById(R.id.swtCartao);
         assert swtCartao != null;
 
+        //Recupera os objetos dos TextView
+        TextView tvCadastrarContasFixas = (TextView) findViewById(R.id.tvCadastrarContasFixas);
+        TextView tvCadastrarSalarioFixo = (TextView) findViewById(R.id.tvCadastrarSalarioFixo);
+        TextView tvBackupManual = (TextView) findViewById(R.id.tvBackupManual);
+        TextView tvCadastrarCartao = (TextView) findViewById(R.id.tvCadastrarCartao);
+        final TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
+        final TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
+
+        //Move o cursor para a primeira linha
         if(csrConfig.moveToFirst()){
 
-            SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipoconta;", null);
+            //Recupera os dados do tipo de conta fixa
+            SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipocontafixa;", null);
 
+            //Preenche os Switchs ao abrir a tela
             if(csrConfig.getInt(csrConfig.getColumnIndex("tp_contafixa")) == 1){
                 swtTipoContaFixa.setChecked(true);
                 if(csrContas.getCount() > 0 ){
@@ -87,32 +98,31 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 swtCartao.setChecked(false);
             }
 
-            SQLiteCursor csrConfigSalario = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
-            csrConfigSalario.moveToFirst();
-            if(csrConfigSalario.getDouble(csrConfigSalario.getColumnIndex("vl_salariofixo")) != 0){
-                TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
-                double vlSalarioFixoFormat = csrConfigSalario.getDouble(csrConfigSalario.getColumnIndex("vl_salariofixo"));
+            //Preenche os campos "Salario Fixo" e "Data Backup"
+            if(csrConfig.getDouble(csrConfig.getColumnIndex("vl_salariofixo")) != 0){
+                double vlSalarioFixoFormat = csrConfig.getDouble(csrConfig.getColumnIndex("vl_salariofixo"));
                 tvValorSalarioFixo.setText("("+NumberFormat.getCurrencyInstance().format(vlSalarioFixoFormat)+")");
             }else{
-                TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
                 tvValorSalarioFixo.setText("");
             }
 
-            if(csrConfig.getString(csrConfig.getColumnIndex("dt_backup")) != ""){
-                TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
-                tvDataBackupManual.setText("("+csrConfig.getString(csrConfig.getColumnIndex("dt_backup"))+")");
-            }else{
-                TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
+                Toast.makeText(getBaseContext(), "diferente de vazio: "+csrConfig.getString(csrConfig.getColumnIndex("dt_backup")), Toast.LENGTH_SHORT).show();
+            if(csrConfig.getString(csrConfig.getColumnIndex("dt_backup")) == null){
                 tvDataBackupManual.setText("");
+                Toast.makeText(getBaseContext(), "Aplicando vazio para o campo tvDataBackupManual", Toast.LENGTH_SHORT).show();
+            }else{
+                tvDataBackupManual.setText("("+csrConfig.getString(csrConfig.getColumnIndex("dt_backup"))+")");
             }
 
         }
 
+        //Se o Switch do Salario fixo for checado/deschecado verifica se tem tipos de conta fixa cadastradas,
+        //  se não não deixa checar.
         swtTipoContaFixa.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipoconta;", null);
+                    SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipocontafixa;", null);
                     if(csrContas.getCount() <= 0){
                         Toast.makeText(getBaseContext(), "Você não tem tipos de conta fixa cadastradas. Clicar em 'Cadastar Contas Fixas' para adicionar uma.", Toast.LENGTH_LONG).show();
                         swtTipoContaFixa.setChecked(false);
@@ -121,18 +131,20 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             }
         });
 
+        //Se o Switch do Salario fixo for checado/deschecado verifica se tem salario fixo cadastrado,
+        //   se não tiver, não deixa checar e não mostra o valor na tela, se tiver, recupera o salario
+        //   formata como moeda BR e mostra na tela.
         swtSalarioFixo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
-                    csrConfig.moveToFirst();
-                    if(csrConfig.getInt(csrConfig.getColumnIndex("vl_salariofixo")) == 0){
+                    SQLiteCursor csrConfigSalarioFixo = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+                    csrConfigSalarioFixo.moveToFirst();
+                    if(csrConfigSalarioFixo.getInt(csrConfigSalarioFixo.getColumnIndex("vl_salariofixo")) == 0){
                         Toast.makeText(getBaseContext(), "Você não tem salário fixo cadastrado. Clicar em 'Cadastar Salario Fixo' para adicionar um.", Toast.LENGTH_LONG).show();
                         swtSalarioFixo.setChecked(false);
 
-                        //preenche po valor do salaraio fixo na tela
-                        TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
+                        //preenche o valor do salaraio fixo na tela
                         tvValorSalarioFixo.setText("");
 
                     }else{
@@ -141,7 +153,6 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                         csrConfigSalario.moveToFirst();
 
                         //preenche po valor do salaraio fixo na tela
-                        TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
                         double vlSalarioFixoFormat = csrConfigSalario.getDouble(csrConfigSalario.getColumnIndex("vl_salariofixo"));
                         tvValorSalarioFixo.setText("("+NumberFormat.getCurrencyInstance().format(vlSalarioFixoFormat)+")");
 
@@ -150,18 +161,20 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 }else{
 
                     //preenche po valor do salaraio fixo na tela
-                    TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
                     tvValorSalarioFixo.setText("");
                 }
             }
         });
-
+        
+        //Se o Switch do Backup Automatico for checado/deschecado insere a data atual e mostra a data na tela
+        //   se não tiver mostra a data vazia na tela.
         swtBackupAutomatico.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
 
-                    SQLiteCursor csrConfig = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+                    SQLiteCursor csrConfigBackup = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+                    
                     //coloca os valores num container
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -170,9 +183,9 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     ContentValues ctvSalvaConfig = new ContentValues();
                     ctvSalvaConfig.put("dt_backup", dateFormat.format(date));
 
-                    if(csrConfig.getCount() > 0){
+                    if(csrConfigBackup.getCount() > 0){
 
-                        csrConfig.moveToFirst();
+                        csrConfigBackup.moveToFirst();
 
                         if(db.update("tba_config", ctvSalvaConfig, "_id = ?",  new String[]{String.valueOf(csrConfig.getInt(0))}) > 0){
                             Toast.makeText(getBaseContext(), "O Backup será realizado mensalmente a partir da data atual("+dateFormat.format(date)+").", Toast.LENGTH_LONG).show();
@@ -187,20 +200,20 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "Não foi possivel salvar as configurações!", Toast.LENGTH_LONG).show();
                         }
                     }
-
+                    Toast.makeText(ConfiguracoesActivity.this, "entrei pra preencher a data", Toast.LENGTH_SHORT).show();
                     //preenche a data na tela
-                    TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
                     tvDataBackupManual.setText("("+dateFormat.format(date)+")");
 
                 }else{
 
                     //preenche po valor do salaraio fixo na tela
-                    TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
                     tvDataBackupManual.setText("");
                 }
             }
         });
 
+        //Se o Switch do Cartão for checado/deschecado verifica se tem cartão cadastrado, se não
+        //  tiver não deixa checar.
         swtCartao.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -214,7 +227,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             }
         });
 
-        TextView tvCadastrarContasFixas = (TextView) findViewById(R.id.tvCadastrarContasFixas);
+        //Abre a TipoContaFixaActivity para cadastrar manipular os tipos de contas fixas
         if(tvCadastrarContasFixas != null){
             tvCadastrarContasFixas.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -225,7 +238,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             });
         }
 
-        TextView tvCadastrarSalarioFixo = (TextView) findViewById(R.id.tvCadastrarSalarioFixo);
+        //Abre um Dialog para cadastrar um salário fixo
         if(tvCadastrarSalarioFixo != null){
             tvCadastrarSalarioFixo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -235,7 +248,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             });
         }
 
-        TextView tvBackupManual = (TextView) findViewById(R.id.tvBackupManual);
+        //Abre a BackupActivity para fazer o backup manualmente
         if(tvBackupManual != null){
             tvBackupManual.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -246,7 +259,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     adBackupManual.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent inttBackupManual = new Intent(getApplicationContext(),BackupManualActivity.class);
+                            Intent inttBackupManual = new Intent(getApplicationContext(),BackupActivity.class);
                             startActivity(inttBackupManual);
                         }
                     });
@@ -261,7 +274,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             });
         }
 
-        TextView tvCadastrarCartao = (TextView) findViewById(R.id.tvCadastrarCartao);
+        //Abre a CartaoActivity para cadastrar novos cartões
         if(tvCadastrarCartao != null){
             tvCadastrarCartao.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -272,7 +285,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             });
         }
 
-        final TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
+        //Exclui o valor do salário fixo
         if(tvValorSalarioFixo.getText() != ""){
             tvValorSalarioFixo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -307,12 +320,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             });
         }
 
-        final TextView tvDataBackupManual = (TextView) findViewById(R.id.tvDataBackupManual);
+        //Exclui a data do backup automático
         if(tvDataBackupManual.getText() != ""){
             tvDataBackupManual.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder alertExcluirDataBackup=  new AlertDialog.Builder(ConfiguracoesActivity.this);
+                    AlertDialog.Builder alertExcluirDataBackup = new AlertDialog.Builder(ConfiguracoesActivity.this);
                     alertExcluirDataBackup.setMessage("Deseja excluir a data do backup cadastrada?");
                     alertExcluirDataBackup.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                         @Override

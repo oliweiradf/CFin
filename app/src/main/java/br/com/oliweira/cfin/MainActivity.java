@@ -65,14 +65,19 @@ public class MainActivity extends AppCompatActivity {
             db.insert("tba_config", "_id", ctvSalvaConfig);
         }
 
-        //tba_tipoconta
-        StringBuilder sqlContas = new StringBuilder();
-        sqlContas.append("CREATE TABLE IF NOT EXISTS tba_tipoconta(");
-        sqlContas.append("_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
-        sqlContas.append("no_tipoconta VARCHAR(30), ");
-        sqlContas.append("vl_bruto NUMERIC(10,2), ");
-        sqlContas.append("tp_operador VARCHAR(1));");
-        db.execSQL(sqlContas.toString());
+/*
+        StringBuilder sqlAlterConfig = new StringBuilder();
+        sqlAlterConfig.append("ALTER TABLE tba_config ADD COLUMN dt_backup VARCHAR;");
+        db.execSQL(sqlAlterConfig.toString());
+*/
+        //tba_tipocontafixa
+        StringBuilder sqlTipoContaFixa = new StringBuilder();
+        sqlTipoContaFixa.append("CREATE TABLE IF NOT EXISTS tba_tipocontafixa(");
+        sqlTipoContaFixa.append("_id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+        sqlTipoContaFixa.append("no_tipocontafixa VARCHAR(30), ");
+        sqlTipoContaFixa.append("vl_bruto NUMERIC(10,2), ");
+        sqlTipoContaFixa.append("tp_operador VARCHAR(1));");
+        db.execSQL(sqlTipoContaFixa.toString());
 
         //tba_cartao
         StringBuilder sqlCartao = new StringBuilder();
@@ -160,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fabMenu.close(true);
-                Intent intent = new Intent(getApplicationContext(), VisualizarCFinActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ControleFinanceiroActivity.class);
                 startActivity(intent);
             }
         });
@@ -229,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         //Estacia o Banco de dados
         final SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);
 
-        SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipoconta;", null);
+        SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipocontafixa;", null);
 
         if (csrContas.getCount() <= 0) {
             AlertDialog.Builder msg = new AlertDialog.Builder(MainActivity.this);
@@ -239,16 +244,16 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //contas padrões
-                    String[] no_conta = {"Celular","Empréstimo a pagar","Empréstimo a receber","Investimento","Poupanca","Plano de saúde","Prestação Carro","Salário"};
+                    String[] no_tipocontafixa = {"Celular","Empréstimo a pagar","Empréstimo a receber","Investimento","Poupanca","Plano de saúde","Prestação Carro","Salário"};
                     double[] vl_bruto = {0.00,0.00 ,0.00,0.00,0.00,0.00,0.00,0.00};
                     String[] tp_operador = {"D","D","C","C","C","D","D","C"};
 
-                    for (int i = 0; i < no_conta.length; i++) {
+                    for (int i = 0; i < no_tipocontafixa.length; i++) {
                         ContentValues ctvContas = new ContentValues();
-                        ctvContas.put("no_tipoconta", no_conta[i]);
+                        ctvContas.put("no_tipocontafixa", no_tipocontafixa[i]);
                         ctvContas.put("vl_bruto", vl_bruto[i]);
                         ctvContas.put("tp_operador", tp_operador[i]);
-                        db.insert("tba_tipoconta", "_id", ctvContas);
+                        db.insert("tba_tipocontafixa", "_id", ctvContas);
                     }
 
                     //insere 1 na coluna "tp_contafixa"da tabela "tba_config" para falar que o app usa um conta fixa
@@ -274,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(MainActivity.this, "Você deve cadastrar pelo menos um tipo de conta.", Toast.LENGTH_SHORT).show();
                     db.close();
-                    Intent intent = new Intent(getApplicationContext(),NovoTipoContaActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),TipoContaFixaActivity.class);
                     startActivity(intent);
                 }
             });
@@ -283,12 +288,12 @@ public class MainActivity extends AppCompatActivity {
 
         }else{
             db.close();
-            Toast.makeText(MainActivity.this, nomeActivity, Toast.LENGTH_SHORT).show();
+
             if(nomeActivity.equals("NovaCompra")){
-                Intent intent = new Intent(getApplicationContext(), NovaCompraActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CompraActivity.class);
                 startActivity(intent);
             }else if(nomeActivity.equals("NovaCompraCartao")){
-                Intent intent = new Intent(getApplicationContext(), NovaCompraCartaoActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CompraCartaoActivity.class);
                 startActivity(intent);
             }
         }

@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/cfin_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -14,21 +15,17 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NovoTipoContaActivity" />
-        <activity android:name=".NovaCompraActivity" />
-        <activity android:name=".NovaCompraCartaoActivity" />
-        <activity android:name=".VisualizarCFinActivity" />
-        <activity
-            android:name=".ConfiguracoesActivity"
-            android:label="Configurações" />
+        <activity android:name=".BackupActivity" />
+        <activity android:name=".CartaoActivity" />
+        <activity android:name=".CompraActivity" />
+        <activity android:name=".CompraCartaoActivity" />
+        <activity android:name=".ConfiguracoesActivity" android:label="Configurações" />
+        <activity android:name=".ControleFinanceiroActivity" />
         <activity android:name=".PessoaActivity" />
-        <activity android:name=".BackupManualActivity" />
         <activity android:name=".TipoContaFixaActivity" />
-        <activity android:name=".CartaoActivity"></activity>
     </application>
 
 </manifest>
