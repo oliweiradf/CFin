@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
-public class NovaCompraCartaoActivity extends AppCompatActivity {
+public class CompraCartaoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nova_compra_cartao);
+        setContentView(R.layout.activity_compra_cartao);
 
         //estancia db_cfin
         SQLiteDatabase db = openOrCreateDatabase("db_cfin", MODE_PRIVATE, null);

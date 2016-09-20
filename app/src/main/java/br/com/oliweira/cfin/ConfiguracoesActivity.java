@@ -23,7 +23,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.lang.Thread.sleep;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
 
@@ -58,8 +57,9 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
         if(csrConfig.moveToFirst()){
 
-            SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipoconta;", null);
+            SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipocontafixa;", null);
 
+            //Preenche os Switchs ao abrir a tela
             if(csrConfig.getInt(csrConfig.getColumnIndex("tp_contafixa")) == 1){
                 swtTipoContaFixa.setChecked(true);
                 if(csrContas.getCount() > 0 ){
@@ -87,11 +87,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 swtCartao.setChecked(false);
             }
 
-            SQLiteCursor csrConfigSalario = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
-            csrConfigSalario.moveToFirst();
-            if(csrConfigSalario.getDouble(csrConfigSalario.getColumnIndex("vl_salariofixo")) != 0){
+            //Preenche os campos "Salario Fixo" e "Data Backup"
+            //SQLiteCursor csrConfigSalario = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_config;", null);
+            //csrConfigSalario.moveToFirst();
+            if(csrConfig.getDouble(csrConfig.getColumnIndex("vl_salariofixo")) != 0){
                 TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
-                double vlSalarioFixoFormat = csrConfigSalario.getDouble(csrConfigSalario.getColumnIndex("vl_salariofixo"));
+                double vlSalarioFixoFormat = csrConfig.getDouble(csrConfig.getColumnIndex("vl_salariofixo"));
                 tvValorSalarioFixo.setText("("+NumberFormat.getCurrencyInstance().format(vlSalarioFixoFormat)+")");
             }else{
                 TextView tvValorSalarioFixo = (TextView) findViewById(R.id.tvValorSalarioFixo);
@@ -112,7 +113,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipoconta;", null);
+                    SQLiteCursor csrContas = (SQLiteCursor) db.rawQuery("SELECT * FROM tba_tipocontafixa;", null);
                     if(csrContas.getCount() <= 0){
                         Toast.makeText(getBaseContext(), "Você não tem tipos de conta fixa cadastradas. Clicar em 'Cadastar Contas Fixas' para adicionar uma.", Toast.LENGTH_LONG).show();
                         swtTipoContaFixa.setChecked(false);
@@ -246,7 +247,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     adBackupManual.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent inttBackupManual = new Intent(getApplicationContext(),BackupManualActivity.class);
+                            Intent inttBackupManual = new Intent(getApplicationContext(),BackupActivity.class);
                             startActivity(inttBackupManual);
                         }
                     });

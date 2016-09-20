@@ -7,14 +7,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.oliweira.cfin.NovoTipoContaActivity">
+    tools:context=".CompraActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Novo Tipo de Conta"
-        android:id="@+id/textView2"
+        android:text="Selecione o tipo da conta"
+        android:id="@+id/textView"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnTipoConta"
+        android:layout_below="@+id/textView"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
