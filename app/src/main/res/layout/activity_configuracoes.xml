@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvTipoContaFixa"
         android:layout_alignParentEnd="true"
-        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -71,7 +70,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvSalarioFixo"
         android:layout_alignParentEnd="true"
-        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -124,7 +122,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvBackupAutomatico"
         android:layout_alignParentEnd="true"
-        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView
@@ -177,7 +174,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvCartao"
         android:layout_alignParentEnd="true"
-        android:text="@string/off_on"
         android:textColor="@color/colorWhite" />
 
     <TextView

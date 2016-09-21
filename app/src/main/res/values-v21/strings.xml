@@ -20,4 +20,6 @@
     <string name="salvar_salario">Salvar Salário</string>
     <string name="selecione_tabelas_backup">Selecione as tabelas para o backup:</string>
     <string name="nome_cartao">Nome do Cartão</string>
+    <string name="importar_banco_de_dados">Importar Banco de Dados</string>
+    <string name="exportar_banco_de_dados">Exportar Banco de Dados</string>
 </resources>
