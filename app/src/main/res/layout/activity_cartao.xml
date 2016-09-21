@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Tipo do Operador"
-        android:id="@+id/tvTipoOperador"
+        android:id="@+id/tvTipoOperadorLv"
         android:layout_below="@+id/spnTipoBandeira"
         android:layout_alignParentStart="true" />
 
@@ -54,7 +54,7 @@
         android:id="@+id/spnTipoOperador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTipoOperador"
+        android:layout_below="@+id/tvTipoOperadorLv"
         android:layout_alignParentStart="true" />
 
     <Button

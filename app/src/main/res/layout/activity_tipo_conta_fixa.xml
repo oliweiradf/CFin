@@ -10,11 +10,26 @@
     tools:context="br.com.oliweira.cfin.TipoContaFixaActivity">
 
     <TextView
+        android:id="@+id/tvTipoContaFixa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/tipo_contas_fixas"
-        android:id="@+id/tvTipoContaFixa"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="@string/tipo_contas_fixas"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ListView
+        android:id= "@+id/lvTipoContaFixa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvTipoContaFixa" />
+
+    <Button
+        android:id="@+id/btnAdicionarTipoContaFixa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lvTipoContaFixa"
+        android:layout_alignParentBottom="true"
+        android:text="Cadastrar Tipo de Conta Fixa" />
 </RelativeLayout>

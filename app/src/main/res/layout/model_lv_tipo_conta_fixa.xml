@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvIdTipoContaFixaLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="id"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvTipoOperadorLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/tvIdTipoContaFixaLv"
+        android:text="Tipo Operador" />
+
+    <TextView
+        android:id="@+id/tvTraco1Lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/tvTipoOperadorLv"
+        android:text="  -  " />
+
+    <TextView
+        android:id="@+id/tvTipoContaFixaLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/tvTraco1Lv"
+        android:text="Tipo Conta Fixa" />
+
+</RelativeLayout>
