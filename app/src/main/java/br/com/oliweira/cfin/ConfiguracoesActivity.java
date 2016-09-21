@@ -106,12 +106,13 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 tvValorSalarioFixo.setText("");
             }
 
-                Toast.makeText(getBaseContext(), "diferente de vazio: "+csrConfig.getString(csrConfig.getColumnIndex("dt_backup")), Toast.LENGTH_SHORT).show();
-            if(csrConfig.getString(csrConfig.getColumnIndex("dt_backup")) == null){
+            if(csrConfig.getString(csrConfig.getColumnIndex("dt_backup")) == "" || csrConfig.getInt(csrConfig.getColumnIndex("tp_backupauto")) == 0){
                 tvDataBackupManual.setText("");
-                Toast.makeText(getBaseContext(), "Aplicando vazio para o campo tvDataBackupManual", Toast.LENGTH_SHORT).show();
+                swtBackupAutomatico.setChecked(false);
             }else{
+                swtBackupAutomatico.setChecked(true);
                 tvDataBackupManual.setText("("+csrConfig.getString(csrConfig.getColumnIndex("dt_backup"))+")");
+
             }
 
         }
@@ -200,7 +201,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "Não foi possivel salvar as configurações!", Toast.LENGTH_LONG).show();
                         }
                     }
-                    Toast.makeText(ConfiguracoesActivity.this, "entrei pra preencher a data", Toast.LENGTH_SHORT).show();
+
                     //preenche a data na tela
                     tvDataBackupManual.setText("("+dateFormat.format(date)+")");
 

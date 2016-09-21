@@ -9,12 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.oliweira.cfin.BackupActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btn_exportar"
+        android:text="@string/exportar_banco_de_dados"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/selecione_tabelas_backup"
-        android:id="@+id/tvSelecioneTabelas"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="exportaDB"/>
+
+    <Button
+        android:id="@+id/btn_Importar"
+        android:text="@string/importar_banco_de_dados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:layout_below="@+id/btn_exportar"
+        android:onClick="importaDB"/>
 </RelativeLayout>
